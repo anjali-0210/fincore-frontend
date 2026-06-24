@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Login from './Login';
 import Dashboard from './Dashboard'; 
+import Home from './Home'; // 
 
 // Split views imports
 import CompaniesList from './CompaniesList';
@@ -14,15 +15,9 @@ import IncomeCreate from './IncomeCreate';
 import IncomeEdit from './IncomeEdit';
 import IncomeView from './IncomeView'; 
 
-
-
-
-
-
 import axios from 'axios';
 
 function AppContent() {
-    // Shuruat mein hi token aur user local storage se check kar lein taaki loading screen na aaye
     const [isLoggedIn, setIsLoggedIn] = useState(() => {
         return !!localStorage.getItem('token');
     });
@@ -36,7 +31,6 @@ function AppContent() {
         }
     });
 
-    // Loading ko false rakhein taaki direct dashboard load ho sake
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
@@ -44,7 +38,6 @@ function AppContent() {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            // Background mein silent verification chalega
             fetchUserProfile(token);
         } else {
             setIsLoggedIn(false);
@@ -63,12 +56,12 @@ function AppContent() {
                 }
             });
             setUser(response.data);
-            // User data ko local storage mein save karein taaki next refresh par instantly retrieve ho sake
             localStorage.setItem('user', JSON.stringify(response.data));
             setIsLoggedIn(true);
             setLoading(false);
 
-            if (location.pathname === '/admin/login' || location.pathname === '/') {
+            // यदि यूजर लॉग-इन है और लॉगिन पेज पर जाता है, तो उसे डैशबोर्ड पर भेजें
+            if (location.pathname === '/admin/login') {
                 navigate('/admin/dashboard');
             }
         } catch (err) {
@@ -119,12 +112,12 @@ function AppContent() {
 
     return (
         <Routes>
-            <Route path="/" element={<Navigate to="/admin/login" replace />} />
+            {/* 2. मुख्य रूट पर अब सीधे Home कंपोनेंट लोड होगा */}
+            <Route path="/" element={<Home />} />
 
             <Route path="/admin/login" element={
                 !isLoggedIn ? (
                     <Login onLoginSuccess={() => {
-                        // Login hone ke baad direct API call karein bina page lock kiye
                         const token = localStorage.getItem('token');
                         fetchUserProfile(token);
                     }} />
@@ -179,32 +172,25 @@ function AppContent() {
                 )
             } />
 
-
-
             {/* INCOME MANAGEMENT ROUTINGS */}
-<Route path="/admin/incomes" element={
-    isLoggedIn ? <IncomesList user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
-} />
+            <Route path="/admin/incomes" element={
+                isLoggedIn ? <IncomesList user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
+            } />
 
-<Route path="/admin/incomes/create" element={
-    isLoggedIn ? <IncomeCreate user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
-} />
+            <Route path="/admin/incomes/create" element={
+                isLoggedIn ? <IncomeCreate user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
+            } />
 
-<Route path="/admin/incomes/edit/:id" element={
-    isLoggedIn ? <IncomeEdit user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
-} />
+            <Route path="/admin/incomes/edit/:id" element={
+                isLoggedIn ? <IncomeEdit user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
+            } />
 
-
-<Route path="/admin/incomes/view/:id" element={
-    isLoggedIn ? <IncomeView user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
-} />
-
+            <Route path="/admin/incomes/view/:id" element={
+                isLoggedIn ? <IncomeView user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
+            } />
 
             <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
         </Routes>
-
-
-
     );
 }
 
