@@ -28,7 +28,7 @@ export default function CompanyTable() {
   // Live API data fetch karna
   const getCompanies = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/companies", {
+      const response = await axios.get("https://grobee.in/expenses/api/companies", {
         headers: getHeaders(),
       });
       if (response.data.status) {
@@ -51,7 +51,7 @@ export default function CompanyTable() {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this company?")) {
       try {
-        await axios.delete(`http://127.0.0.1:8000/api/companies/${id}`, {
+        await axios.delete(`https://grobee.in/expenses/api/companies/${id}`, {
           headers: getHeaders(),
         });
         alert("Company deleted successfully!");

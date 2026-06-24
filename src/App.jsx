@@ -12,8 +12,10 @@ import CompanyView from './CompanyView';
 import IncomesList from './IncomesList';
 import IncomeCreate from './IncomeCreate';
 import IncomeEdit from './IncomeEdit';
+import IncomeView from './IncomeView'; 
 
-import IncomeView from './IncomeView'; // Import karein
+
+
 
 
 
@@ -54,7 +56,7 @@ function AppContent() {
 
     const fetchUserProfile = async (token) => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/profile', {
+            const response = await axios.get('https://grobee.in/expenses/api/profile', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     Accept: 'application/json'
@@ -80,7 +82,7 @@ function AppContent() {
         const token = localStorage.getItem('token');
         if (token) {
             try {
-                await axios.post('http://127.0.0.1:8000/api/logout', {}, {
+                await axios.post('https://grobee.in/expenses/api/logout', {}, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -200,6 +202,9 @@ function AppContent() {
 
             <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
         </Routes>
+
+
+
     );
 }
 

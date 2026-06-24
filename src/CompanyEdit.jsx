@@ -25,7 +25,7 @@ function CompanyEdit({ user, handleLogout }) {
     useEffect(() => {
         const getCompanyDetails = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/companies/${id}`, {
+                const response = await axios.get(`https://grobee.in/expenses/api/companies/${id}`, {
                     headers: getHeaders()
                 });
                 if (response.data.status) {
@@ -58,7 +58,7 @@ function CompanyEdit({ user, handleLogout }) {
         };
 
         try {
-            await axios.put(`http://127.0.0.1:8000/api/companies/${id}`, companyData, {
+            await axios.put(`https://grobee.in/expenses/api/companies/${id}`, companyData, {
                 headers: getHeaders()
             });
             alert("Company updated successfully!");

@@ -30,7 +30,7 @@ function IncomesList({ user, handleLogout }) {
 
     const getIncomes = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/incomes', {
+            const response = await axios.get('https://grobee.in/expenses/api/incomes', {
                 headers: getHeaders()
             });
             if (response.data.status) {
@@ -51,7 +51,7 @@ function IncomesList({ user, handleLogout }) {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this transaction?")) {
             try {
-                await axios.delete(`http://127.0.0.1:8000/api/incomes/${id}`, {
+                await axios.delete(`https://grobee.in/expenses/api/incomes/${id}`, {
                     headers: getHeaders()
                 });
                 alert("Transaction deleted successfully!");

@@ -38,7 +38,7 @@ function IncomeEdit({ user, handleLogout }) {
         // 1. Dropdown select ke liye Companies List load karein
         const fetchCompanies = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/companies', {
+                const response = await axios.get('https://grobee.in/expenses/api/companies', {
                     headers: getHeaders()
                 });
                 if (response.data.status) {
@@ -52,7 +52,7 @@ function IncomeEdit({ user, handleLogout }) {
         // 2. Is specific Income Transaction ki saari details load karein
         const fetchIncomeDetails = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/incomes/${id}`, {
+                const response = await axios.get(`https://grobee.in/expenses/api/incomes/${id}`, {
                     headers: getHeaders()
                 });
                 if (response.data.status) {
@@ -95,7 +95,7 @@ function IncomeEdit({ user, handleLogout }) {
         };
 
         try {
-            await axios.put(`http://127.0.0.1:8000/api/incomes/${id}`, payload, {
+            await axios.put(`https://grobee.in/expenses/api/incomes/${id}`, payload, {
                 headers: getHeaders()
             });
             alert("Transaction details updated successfully!");
@@ -110,7 +110,7 @@ function IncomeEdit({ user, handleLogout }) {
         /* Outer Layout - stacks vertically on mobile, horizontally on desktop */
         <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col md:flex-row">
             
-            {/* ✅ बिना किसी wrapper div के सीधे Sidebar को रखें */}
+            
             <Sidebar user={user} handleLogout={handleLogout} />
 
             {/* Main Area */}

@@ -33,7 +33,7 @@ function CompanyCreate({ user, handleLogout }) {
         };
 
         try {
-            await axios.post('http://127.0.0.1:8000/api/companies', companyData, {
+            await axios.post('https://grobee.in/expenses/api/companies', companyData, {
                 headers: getHeaders()
             });
             alert("Company created successfully!");
