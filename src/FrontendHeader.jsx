@@ -23,24 +23,7 @@ export default function FrontendHeader() {
                     </div>
 
                     {/* 2. Middle Section: Premium Modern Nav Links */}
-                    <nav className="hidden md:flex items-center space-x-10">
-                        <a href="#features" className="text-[14px] font-semibold text-slate-500 hover:text-rose-500 transition-all duration-200 relative group">
-                            Features
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-                        <a href="#pricing" className="text-[14px] font-semibold text-slate-500 hover:text-rose-500 transition-all duration-200 relative group">
-                            Pricing
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-                        <a href="#about" className="text-[14px] font-semibold text-slate-500 hover:text-rose-500 transition-all duration-200 relative group">
-                            About Us
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-                        <a href="#contact" className="text-[14px] font-semibold text-slate-500 hover:text-rose-500 transition-all duration-200 relative group">
-                            Contact
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-                    </nav>
+                    
 
                     {/* 3. Right Section: Premium CTA Button */}
                     <div className="flex items-center">
