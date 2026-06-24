@@ -1,218 +1,82 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import FrontendHeader from './FrontendHeader'; 
+import FrontendFooter from './FrontendFooter'; 
 
 export default function Home() {
-    const navigate = useNavigate();
-
-    // Color Theme Constants matching your app screenshot
-    const themeColor = 'linear-gradient(to right, #ec4899, #f43f5e)'; // Pink to Rose Gradient
-    const bgGradient = 'linear-gradient(135deg, #fff5f5 0%, #fff1f2 50%, #fdf4ff 100%)'; // Soft pink background gradient
-    const textColor = '#1e293b'; // Slate-800 for headers
-    const subTextColor = '#475569'; // Slate-600 for descriptions
-
     return (
-        <div style={{
-            minHeight: '100vh',
-            fontFamily: '"Plus Jakarta Sans", "Inter", sans-serif',
-            background: bgGradient,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '40px 20px',
-            boxSizing: 'border-box',
-            color: textColor
-        }}>
-            {/* Top Navigation Logo Area */}
-            <header style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-                width: '100%',
-                maxWidth: '1100px',
-                justifyContent: 'flex-start',
-                marginBottom: '40px'
-            }}>
-                <div style={{
-                    background: themeColor,
-                    color: '#fff',
-                    width: '45px',
-                    height: '45px',
-                    borderRadius: '12px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '1.5rem',
-                    fontWeight: '900',
-                    boxShadow: '0 8px 20px rgba(244, 63, 94, 0.2)'
-                }}>
-                    F
-                </div>
-                <span style={{ fontSize: '1.4rem', fontWeight: '800', letterSpacing: '-0.05em' }}>
-                    Fincore <span style={{ fontWeight: '400', fontSize: '0.9rem', color: subTextColor }}>| Finance ERP</span>
-                </span>
-            </header>
+        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col justify-between items-center w-full m-0 p-0 box-border text-slate-800">
+            
+            {/* 1. Header (Pushes to the top edges perfectly) */}
+            <FrontendHeader />
 
-            {/* Main Hero & Content Section */}
-            <main style={{
-                textAlign: 'center',
-                maxWidth: '850px',
-                margin: 'auto',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '24px'
-            }}>
-                {/* Small Tag */}
-                <span style={{
-                    background: 'rgba(236, 72, 153, 0.08)',
-                    color: '#db2777',
-                    padding: '8px 16px',
-                    borderRadius: '99px',
-                    fontSize: '0.85rem',
-                    fontWeight: '700',
-                    border: '1px solid rgba(236, 72, 153, 0.15)',
-                    letterSpacing: '0.05em',
-                    textTransform: 'uppercase'
-                }}>
+            {/* 2. Responsive Main Content Area */}
+            <main className="flex-1 flex flex-col items-center justify-center text-center max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 gap-6 sm:gap-8 box-border">
+                
+                {/* Small Pill Tag */}
+                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-bold bg-pink-500/10 text-pink-600 border border-pink-500/15 tracking-wider uppercase">
                     Enterprise ERP Solution
                 </span>
 
-                <h1 style={{
-                    fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
-                    fontWeight: '900',
-                    lineHeight: '1.15',
-                    margin: '0',
-                    letterSpacing: '-0.03em'
-                }}>
+                {/* Responsive Main Heading */}
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-800 leading-[1.15] tracking-tight m-0">
                     Finance & Expense <br />
-                    <span style={{
-                        background: themeColor,
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent'
-                    }}>Management System</span>
+                    <span className="bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent">
+                        Management System
+                    </span>
                 </h1>
 
-                <p style={{
-                    fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-                    color: subTextColor,
-                    lineHeight: '1.6',
-                    maxWidth: '650px',
-                    margin: '0 auto 10px auto'
-                }}>
+                {/* Responsive Description Text */}
+                <p className="text-sm sm:text-lg text-slate-600 max-w-2xl leading-relaxed mx-auto m-0">
                     A secure and modern financial ERP platform. Seamlessly track, audit, and manage your business invoices, income records, payments, and pending dues in one centralized dashboard.
                 </p>
 
-                {/* Main Action Button */}
-                <button 
-                    onClick={() => navigate('/admin/login')}
-                    style={{
-                        padding: '16px 40px',
-                        fontSize: '1rem',
-                        fontWeight: '800',
-                        color: '#fff',
-                        background: themeColor,
-                        border: 'none',
-                        borderRadius: '16px',
-                        cursor: 'pointer',
-                        boxShadow: '0 10px 25px rgba(244, 63, 94, 0.3)',
-                        transition: 'all 0.3s ease',
-                    }}
-                    onMouseOver={(e) => {
-                        e.target.style.transform = 'translateY(-2px)';
-                        e.target.style.boxShadow = '0 15px 30px rgba(244, 63, 94, 0.4)';
-                    }}
-                    onMouseOut={(e) => {
-                        e.target.style.transform = 'translateY(0)';
-                        e.target.style.boxShadow = '0 10px 25px rgba(244, 63, 94, 0.3)';
-                    }}
-                >
-                    Access Financial System
-                </button>
-
-                {/* Static Attractive Feature Grid */}
-                <section style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                    gap: '20px',
-                    width: '100%',
-                    maxWidth: '900px',
-                    marginTop: '60px'
-                }}>
-                    {/* Feature 1 */}
-                    <div style={cardStyle}>
-                        <div style={{...iconWrapperStyle, background: 'rgba(236, 72, 153, 0.1)', color: '#ec4899'}}>
+                {/* Fully Responsive Static Feature Grid (1 col on mobile, 2 on tablet, 3 on desktop) */}
+                <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl mt-12 sm:mt-16">
+                    
+                    {/* Feature Card 1 */}
+                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_10px_25px_rgba(0,0,0,0.01)] text-left flex flex-col gap-3 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-pink-500/10 text-pink-500">
                             📊
                         </div>
-                        <h3 style={cardHeaderStyle}>Income Tracking</h3>
-                        <p style={cardTextStyle}>Efficiently record invoice numbers, received amounts, and payment statuses in real-time.</p>
+                        <h3 className="text-base sm:text-lg font-bold text-slate-800 m-0">
+                            Income Tracking
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed m-0">
+                            Efficiently record invoice numbers, received amounts, and payment statuses in real-time.
+                        </p>
                     </div>
 
-                    {/* Feature 2 */}
-                    <div style={cardStyle}>
-                        <div style={{...iconWrapperStyle, background: 'rgba(244, 63, 94, 0.1)', color: '#f43f5e'}}>
+                    {/* Feature Card 2 */}
+                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_10px_25px_rgba(0,0,0,0.01)] text-left flex flex-col gap-3 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-rose-500/10 text-rose-500">
                             📁
                         </div>
-                        <h3 style={cardHeaderStyle}>Audit & Ledgers</h3>
-                        <p style={cardTextStyle}>Monitor company-wide and client-wise financial transactions with detailed audit trails.</p>
+                        <h3 className="text-base sm:text-lg font-bold text-slate-800 m-0">
+                            Audit & Ledgers
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed m-0">
+                            Monitor company-wide and client-wise financial transactions with detailed audit trails.
+                        </p>
                     </div>
 
-                    {/* Feature 3 */}
-                    <div style={cardStyle}>
-                        <div style={{...iconWrapperStyle, background: 'rgba(168, 85, 247, 0.1)', color: '#a855f7'}}>
+                    {/* Feature Card 3 (Takes full span on medium screen for balance if needed, or stays grid) */}
+                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_10px_25px_rgba(0,0,0,0.01)] text-left flex flex-col gap-3 hover:-translate-y-1 hover:shadow-md transition-all duration-300 sm:col-span-2 lg:col-span-1">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-purple-500/10 text-purple-500">
                             💳
                         </div>
-                        <h3 style={cardHeaderStyle}>Secure Access</h3>
-                        <p style={cardTextStyle}>Protect sensitive financial assets with secure token-based authorization and role protection.</p>
+                        <h3 className="text-base sm:text-lg font-bold text-slate-800 m-0">
+                            Secure Access
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed m-0">
+                            Protect sensitive financial assets with secure token-based authorization and role protection.
+                        </p>
                     </div>
+
                 </section>
             </main>
 
-            {/* Footer Area */}
-            <footer style={{
-                fontSize: '0.85rem',
-                color: subTextColor,
-                marginTop: '40px'
-            }}>
-                © {new Date().getFullYear()} Fincore Finance ERP. All rights reserved.
-            </footer>
+            {/* 3. Footer (Pushes to the bottom edges perfectly) */}
+            <FrontendFooter />
         </div>
     );
 }
-
-// Inline Helper Styles
-const cardStyle = {
-    background: '#ffffff',
-    padding: '24px',
-    borderRadius: '20px',
-    border: '1px solid rgba(244, 63, 94, 0.06)',
-    boxShadow: '0 10px 25px rgba(0,0,0,0.02)',
-    textAlign: 'left',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '12px'
-};
-
-const iconWrapperStyle = {
-    width: '40px',
-    height: '40px',
-    borderRadius: '10px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '1.2rem'
-};
-
-const cardHeaderStyle = {
-    fontSize: '1.1rem',
-    fontWeight: '800',
-    margin: '0',
-    color: '#1e293b'
-};
-
-const cardTextStyle = {
-    fontSize: '0.88rem',
-    color: '#64748b',
-    margin: '0',
-    lineHeight: '1.5'
-};

@@ -85,11 +85,9 @@ export default function Sidebar({ user }) {
 
             <div>
               <h2 className="font-black text-xl text-slate-800">
-                Fincore
+                Fincapify
               </h2>
-              <p className="text-xs text-slate-500">
-                Finance ERP
-              </p>
+              
             </div>
           </div>
 
