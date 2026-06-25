@@ -6,10 +6,11 @@ export default function Sidebar({ user }) {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false); // Mobile toggle state
 
-  // Sabhi menus ke paths aur unke names ki list
+  // Sabhi menus ke paths aur unke names ki list (Clients Joda gaya)
   const menus = [
     { name: "Dashboard", path: "/admin/dashboard" },
     { name: "Companies", path: "/admin/companies" },
+    { name: "Clients", path: "/admin/clients" }, // <-- Clients Added Here
     { name: "Incomes", path: "/admin/incomes" },
     { name: "Payments", path: "/admin/payments" },
     { name: "Reports", path: "/admin/reports" },
@@ -30,7 +31,7 @@ export default function Sidebar({ user }) {
       <button
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle Navigation Menu"
-        className="md:hidden fixed top-4 left-4 z-50 p-3 rounded-2xl bg-white/90 backdrop-blur-md border border-pink-100 text-pink-600 shadow-lg hover:bg-pink-50 transition-all duration-300 cursor-pointer flex items-center justify-center"
+        className="md:hidden fixed top-4 left-4 z-50 p-3 rounded-2xl bg-white/90 backdrop-blur-md border border-blue-100 text-blue-600 shadow-lg hover:bg-blue-50 transition-all duration-300 cursor-pointer flex items-center justify-center"
       >
         {isOpen ? (
           // Close Icon (X)
@@ -67,8 +68,8 @@ export default function Sidebar({ user }) {
           bg-white md:bg-white/70
           backdrop-blur-none md:backdrop-blur-2xl
           border-r md:border
-          border-pink-100
-          shadow-2xl md:shadow-[20px_20px_60px_rgba(236,72,153,0.12),-20px_-20px_60px_rgba(255,255,255,0.9)]
+          border-blue-100
+          shadow-2xl md:shadow-[20px_20px_60px_rgba(37,99,235,0.08),-20px_-20px_60px_rgba(255,255,255,0.9)]
           overflow-y-auto
           z-40 md:z-auto
           transition-transform duration-300 ease-in-out
@@ -77,21 +78,20 @@ export default function Sidebar({ user }) {
       >
         {/* Added padding at top on mobile view to avoid overlap with toggle button */}
         <div className="p-8 pt-20 md:pt-8 flex flex-col h-full min-h-[500px]">
-          {/* Logo */}
+          
+          {/* Logo Section */}
           <div className="flex items-center gap-3">
-            <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white font-black text-xl shadow-lg">
+            <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black text-xl shadow-lg">
               F
             </div>
-
             <div>
               <h2 className="font-black text-xl text-slate-800">
                 Fincapify
               </h2>
-              
             </div>
           </div>
 
-          {/* Navigation Menu */}
+          {/* Navigation Menu (Updated with Blue Theme Hover and Active State) */}
           <nav className="mt-10 space-y-3 flex-1">
             {menus.map((item) => {
               const active = isActive(item.path);
@@ -104,8 +104,8 @@ export default function Sidebar({ user }) {
                   }}
                   className={`w-full text-left px-5 py-4 rounded-2xl transition-all duration-300 font-semibold cursor-pointer ${
                     active
-                      ? "bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-[0_15px_35px_rgba(236,72,153,0.35)]"
-                      : "text-slate-600 hover:bg-pink-50 hover:text-pink-600"
+                      ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-[0_15px_35px_rgba(37,99,235,0.25)]"
+                      : "text-slate-600 hover:bg-blue-50 hover:text-blue-600"
                   }`}
                 >
                   {item.name}
@@ -114,10 +114,10 @@ export default function Sidebar({ user }) {
             })}
           </nav>
 
-          {/* User Card */}
-          <div className="mt-6 p-4 rounded-2xl bg-pink-50 border border-pink-100">
+          {/* User Card (Updated with Blue Theme colors) */}
+          <div className="mt-6 p-4 rounded-2xl bg-blue-50/60 border border-blue-100">
             <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white font-bold uppercase">
+              <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold uppercase">
                 {user?.name ? user.name.charAt(0) : "A"}
               </div>
 
