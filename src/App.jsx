@@ -15,6 +15,13 @@ import IncomeCreate from './IncomeCreate';
 import IncomeEdit from './IncomeEdit';
 import IncomeView from './IncomeView'; 
 
+
+import ClientsList from './ClientsList';
+import ClientCreate from './ClientCreate';
+import ClientEdit from './ClientEdit';
+import ClientView from './ClientView';
+
+
 import axios from 'axios';
 
 function AppContent() {
@@ -49,7 +56,7 @@ function AppContent() {
 
     const fetchUserProfile = async (token) => {
         try {
-            const response = await axios.get('https://grobee.in/expenses/api/profile', {
+            const response = await axios.get('https://api.fincapify.com/api/profile', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     Accept: 'application/json'
@@ -60,7 +67,7 @@ function AppContent() {
             setIsLoggedIn(true);
             setLoading(false);
 
-            // यदि यूजर लॉग-इन है और लॉगिन पेज पर जाता है, तो उसे डैशबोर्ड पर भेजें
+           
             if (location.pathname === '/admin/login') {
                 navigate('/admin/dashboard');
             }
@@ -75,7 +82,7 @@ function AppContent() {
         const token = localStorage.getItem('token');
         if (token) {
             try {
-                await axios.post('https://grobee.in/expenses/api/logout', {}, {
+                await axios.post('https://api.fincapify.com/api/logout', {}, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -112,7 +119,7 @@ function AppContent() {
 
     return (
         <Routes>
-            {/* 2. मुख्य रूट पर अब सीधे Home कंपोनेंट लोड होगा */}
+            
             <Route path="/" element={<Home />} />
 
             <Route path="/admin/login" element={
@@ -188,6 +195,23 @@ function AppContent() {
             <Route path="/admin/incomes/view/:id" element={
                 isLoggedIn ? <IncomeView user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
             } />
+
+   {/* --- 2. CLIENT MANAGEMENT ROUTINGS --- */}
+            <Route path="/admin/clients" element={
+                isLoggedIn ? <ClientsList user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
+            } />
+            <Route path="/admin/clients/create" element={
+                isLoggedIn ? <ClientCreate user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
+            } />
+            <Route path="/admin/clients/edit/:id" element={
+                isLoggedIn ? <ClientEdit user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
+            } />
+            <Route path="/admin/clients/view/:id" element={
+                isLoggedIn ? <ClientView user={user} handleLogout={handleLogout} /> : <Navigate to="/admin/login" replace />
+            } />
+
+
+
 
             <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
         </Routes>

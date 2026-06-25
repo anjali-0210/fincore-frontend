@@ -25,7 +25,7 @@ function CompanyEdit({ user, handleLogout }) {
     useEffect(() => {
         const getCompanyDetails = async () => {
             try {
-                const response = await axios.get(`https://grobee.in/expenses/api/companies/${id}`, {
+                const response = await axios.get(`https://api.fincapify.com/api/companies/${id}`, {
                     headers: getHeaders()
                 });
                 if (response.data.status) {
@@ -58,7 +58,7 @@ function CompanyEdit({ user, handleLogout }) {
         };
 
         try {
-            await axios.put(`https://grobee.in/expenses/api/companies/${id}`, companyData, {
+            await axios.put(`https://api.fincapify.com/api/companies/${id}`, companyData, {
                 headers: getHeaders()
             });
             alert("Company updated successfully!");
@@ -72,7 +72,7 @@ function CompanyEdit({ user, handleLogout }) {
     return (
         <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col md:flex-row">
             
-            {/* ✅ बिना किसी wrapper div के सीधे Sidebar को रखें */}
+           
             <Sidebar user={user} handleLogout={handleLogout} />
 
             <div className="flex-1 flex flex-col min-w-0">

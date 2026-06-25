@@ -20,7 +20,7 @@ function CompanyView({ user, handleLogout }) {
     useEffect(() => {
         const fetchCompanyDetails = async () => {
             try {
-                const response = await axios.get(`https://grobee.in/expenses/api/companies/${id}`, {
+                const response = await axios.get(`https://api.fincapify.com/api/companies/${id}`, {
                     headers: getHeaders()
                 });
                 if (response.data.status) {

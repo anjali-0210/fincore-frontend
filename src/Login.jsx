@@ -12,7 +12,7 @@ function Login({ onLoginSuccess }) {
 
         try {
             // Laravel ke login API ko hit karein
-            const response = await axios.post('https://grobee.in/expenses/api/login', {
+            const response = await axios.post('https://api.fincapify.com/api/login', {
                 email: email,
                 password: password
             });

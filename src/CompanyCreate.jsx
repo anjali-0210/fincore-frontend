@@ -33,7 +33,7 @@ function CompanyCreate({ user, handleLogout }) {
         };
 
         try {
-            await axios.post('https://grobee.in/expenses/api/companies', companyData, {
+            await axios.post('https://api.fincapify.com/api/companies', companyData, {
                 headers: getHeaders()
             });
             alert("Company created successfully!");

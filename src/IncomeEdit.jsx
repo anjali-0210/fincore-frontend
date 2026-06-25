@@ -38,7 +38,7 @@ function IncomeEdit({ user, handleLogout }) {
         // 1. Dropdown select ke liye Companies List load karein
         const fetchCompanies = async () => {
             try {
-                const response = await axios.get('https://grobee.in/expenses/api/companies', {
+                const response = await axios.get('https://api.fincapify.com/api/companies', {
                     headers: getHeaders()
                 });
                 if (response.data.status) {
@@ -52,7 +52,7 @@ function IncomeEdit({ user, handleLogout }) {
         // 2. Is specific Income Transaction ki saari details load karein
         const fetchIncomeDetails = async () => {
             try {
-                const response = await axios.get(`https://grobee.in/expenses/api/incomes/${id}`, {
+                const response = await axios.get(`https://api.fincapify.com/api/incomes/${id}`, {
                     headers: getHeaders()
                 });
                 if (response.data.status) {
@@ -95,7 +95,7 @@ function IncomeEdit({ user, handleLogout }) {
         };
 
         try {
-            await axios.put(`https://grobee.in/expenses/api/incomes/${id}`, payload, {
+            await axios.put(`https://api.fincapify.com/api/incomes/${id}`, payload, {
                 headers: getHeaders()
             });
             alert("Transaction details updated successfully!");

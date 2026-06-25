@@ -21,7 +21,7 @@ function IncomeView({ user, handleLogout }) {
     useEffect(() => {
         const fetchIncomeDetails = async () => {
             try {
-                const response = await axios.get(`https://grobee.in/expenses/api/incomes/${id}`, {
+                const response = await axios.get(`https://api.fincapify.com/api/incomes/${id}`, {
                     headers: getHeaders()
                 });
                 if (response.data.status) {

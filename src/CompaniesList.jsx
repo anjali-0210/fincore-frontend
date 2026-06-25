@@ -31,7 +31,7 @@ function CompaniesList({ user, handleLogout }) {
 
     const getCompanies = async () => {
         try {
-            const response = await axios.get('https://grobee.in/expenses/api/companies', {
+            const response = await axios.get('https://api.fincapify.com/api/companies', {
                 headers: getHeaders()
             });
             if (response.data.status) {
@@ -52,7 +52,7 @@ function CompaniesList({ user, handleLogout }) {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this company?")) {
             try {
-                await axios.delete(`https://grobee.in/expenses/api/companies/${id}`, {
+                await axios.delete(`https://api.fincapify.com/api/companies/${id}`, {
                     headers: getHeaders()
                 });
                 alert("Company deleted successfully!");
@@ -80,7 +80,7 @@ function CompaniesList({ user, handleLogout }) {
         /* Outer flex container - handles responsive row/column stack */
         <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col md:flex-row">
             
-            {/* ✅ Wrapper div has been removed to allow Sidebar to render on mobile */}
+         
             <Sidebar user={user} handleLogout={handleLogout} />
 
             {/* Main Area */}
