@@ -40,9 +40,9 @@ function CompanyView({ user, handleLogout }) {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col md:flex-row">
+        // बाहरी बैकग्राउंड को सॉफ्ट नीले ग्रेडीएंट में बदला गया है
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-100 flex flex-col md:flex-row">
             
-           
             <Sidebar user={user} handleLogout={handleLogout} />
 
             <div className="flex-1 flex flex-col min-w-0">
@@ -70,7 +70,7 @@ function CompanyView({ user, handleLogout }) {
                                 <p className="text-slate-400 text-sm mt-1">ID: #{company.id}</p>
                             </div>
                             <span className={`inline-flex px-3 py-1.5 text-xs font-bold rounded-full ${
-                                Number(company.status) === 1 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                                Number(company.status) === 1 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'
                             }`}>
                                 {Number(company.status) === 1 ? 'Active' : 'Inactive'}
                             </span>
@@ -115,7 +115,7 @@ function CompanyView({ user, handleLogout }) {
                         <div className="flex justify-end pt-4 border-t border-slate-100">
                             <button 
                                 onClick={() => navigate(`/admin/companies/edit/${company.id}`)}
-                                className="w-full sm:w-auto text-center px-5 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-xl shadow-lg hover:opacity-95 transition-all text-sm cursor-pointer"
+                                className="w-full sm:w-auto text-center px-5 py-2.5 bg-gradient-to-r from-[#2570C2] to-[#11284E] text-white font-bold rounded-xl shadow-lg shadow-blue-500/10 hover:opacity-95 transition-all text-sm cursor-pointer" // Fincapify थीम में बदला गया है
                             >
                                 Edit This Company
                             </button>

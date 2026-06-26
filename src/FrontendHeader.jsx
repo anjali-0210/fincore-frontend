@@ -14,12 +14,14 @@ export default function FrontendHeader() {
                         className="flex items-center gap-3 group cursor-pointer" 
                         onClick={() => navigate('/')}
                     >
-                        <div className="bg-gradient-to-r from-pink-500 to-rose-500 text-white w-10 h-10 rounded-xl flex items-center justify-center text-xl font-black shadow-lg shadow-rose-500/20 group-hover:scale-105 transition-all duration-300">
-                            F
-                        </div>
-                        <span className="text-xl font-black text-slate-800 tracking-tight group-hover:text-rose-500 transition-colors duration-300">
-                            Fincapify
-                        </span>
+                        <img 
+    src="/logo.svg" 
+    alt="Fincapify Logo" 
+    className="h-11 w-auto object-contain" 
+  />
+  <span className="font-black text-xl text-[#11284E] tracking-tight">
+    Fincapify
+  </span>
                     </div>
 
                     {/* 2. Middle Section: Premium Modern Nav Links */}

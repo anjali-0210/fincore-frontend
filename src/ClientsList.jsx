@@ -41,7 +41,7 @@ function ClientsList({ user, handleLogout }) {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this client?")) {
             try {
-                await axios.delete(`https://api.fincapify.com/expenses/api/clients/${id}`, {
+                await axios.delete(`https://api.fincapify.com/api/clients/${id}`, {
                     headers: getHeaders()
                 });
                 alert("Client deleted successfully!");
@@ -54,7 +54,8 @@ function ClientsList({ user, handleLogout }) {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col md:flex-row">
+        /* BACKGROUND GRADIENT CHANGED TO SLATE/BLUE/INDIGO */
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-100/40 flex flex-col md:flex-row">
             <Sidebar user={user} handleLogout={handleLogout} />
 
             <div className="flex-1 flex flex-col min-w-0">
@@ -68,9 +69,10 @@ function ClientsList({ user, handleLogout }) {
                             <h1 className="text-xl sm:text-2xl font-black text-slate-800">Client Directory</h1>
                             <p className="text-xs sm:text-sm text-slate-500 mt-1">Manage and view business clients and their banking details.</p>
                         </div>
+                        {/* ADD NEW CLIENT BUTTON CHANGED TO INDIGO-BLUE GRADIENT WITH SHADOW */}
                         <button
                             onClick={() => navigate('/admin/clients/create')}
-                            className="w-full sm:w-auto px-5 py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-xl shadow-lg shadow-rose-500/20 hover:shadow-rose-500/30 hover:opacity-95 transition-all text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer"
+                            className="w-full sm:w-auto px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-600/10 hover:shadow-indigo-600/20 hover:opacity-95 transition-all text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer"
                         >
                             <i className="fa-solid fa-plus text-xs"></i> Add New Client
                         </button>
@@ -115,6 +117,7 @@ function ClientsList({ user, handleLogout }) {
                                                 </td>
                                                 <td className="px-6 py-4 text-right whitespace-nowrap">
                                                     <div className="flex items-center justify-end gap-1.5">
+                                                        {/* VIEW BUTTON (NEUTRAL) */}
                                                         <button 
                                                             onClick={() => navigate(`/admin/clients/view/${client.id}`)}
                                                             className="h-9 w-9 text-slate-600 hover:bg-slate-100 rounded-xl transition-all flex items-center justify-center border border-slate-100 cursor-pointer"
@@ -122,16 +125,20 @@ function ClientsList({ user, handleLogout }) {
                                                         >
                                                             <i className="fa-solid fa-eye text-sm"></i>
                                                         </button>
+                                                        
+                                                        {/* EDIT BUTTON CHANGED TO INDIGO */}
                                                         <button 
                                                             onClick={() => navigate(`/admin/clients/edit/${client.id}`)}
-                                                            className="h-9 w-9 text-pink-600 hover:bg-pink-50 rounded-xl transition-all flex items-center justify-center border border-pink-100 cursor-pointer"
+                                                            className="h-9 w-9 text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all flex items-center justify-center border border-indigo-100 cursor-pointer"
                                                             title="Edit Record"
                                                         >
                                                             <i className="fa-solid fa-pen-to-square text-sm"></i>
                                                         </button>
+                                                        
+                                                        {/* DELETE BUTTON CHANGED TO STANDARD RED */}
                                                         <button 
                                                             onClick={() => handleDelete(client.id)}
-                                                            className="h-9 w-9 text-rose-600 hover:bg-rose-50 rounded-xl transition-all flex items-center justify-center border border-rose-100 cursor-pointer"
+                                                            className="h-9 w-9 text-red-600 hover:bg-red-50 rounded-xl transition-all flex items-center justify-center border border-red-100 cursor-pointer"
                                                             title="Delete"
                                                         >
                                                             <i className="fa-solid fa-trash-can text-sm"></i>

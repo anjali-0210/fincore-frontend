@@ -6,11 +6,11 @@ export default function Sidebar({ user }) {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false); // Mobile toggle state
 
-  // Sabhi menus ke paths aur unke names ki list (Clients Joda gaya)
+  // Sabhi menus ke paths aur unke names ki list
   const menus = [
     { name: "Dashboard", path: "/admin/dashboard" },
     { name: "Companies", path: "/admin/companies" },
-    { name: "Clients", path: "/admin/clients" }, // <-- Clients Added Here
+    { name: "Clients", path: "/admin/clients" },
     { name: "Incomes", path: "/admin/incomes" },
     { name: "Payments", path: "/admin/payments" },
     { name: "Reports", path: "/admin/reports" },
@@ -27,11 +27,11 @@ export default function Sidebar({ user }) {
 
   return (
     <>
-      {/* Mobile Toggle Button - Visible only on screens smaller than md */}
+      {/* Mobile Toggle Button - लोगो के नीले थीम आधारित रंग */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle Navigation Menu"
-        className="md:hidden fixed top-4 left-4 z-50 p-3 rounded-2xl bg-white/90 backdrop-blur-md border border-blue-100 text-blue-600 shadow-lg hover:bg-blue-50 transition-all duration-300 cursor-pointer flex items-center justify-center"
+        className="md:hidden fixed top-4 left-4 z-50 p-3 rounded-2xl bg-white/90 backdrop-blur-md border border-[#2570C2]/20 text-[#2570C2] shadow-lg hover:bg-[#2570C2]/10 transition-all duration-300 cursor-pointer flex items-center justify-center"
       >
         {isOpen ? (
           // Close Icon (X)
@@ -46,7 +46,7 @@ export default function Sidebar({ user }) {
         )}
       </button>
 
-      {/* Backdrop overlay (Closes sidebar when clicking outside on mobile) */}
+      {/* Backdrop overlay */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
@@ -54,7 +54,7 @@ export default function Sidebar({ user }) {
         />
       )}
 
-      {/* Sidebar Drawer Container */}
+      {/* Sidebar Drawer Container (लोगो थीम बॉर्डर्स और शैडो) */}
       <aside
         className={`
           fixed md:sticky
@@ -68,30 +68,36 @@ export default function Sidebar({ user }) {
           bg-white md:bg-white/70
           backdrop-blur-none md:backdrop-blur-2xl
           border-r md:border
-          border-blue-100
-          shadow-2xl md:shadow-[20px_20px_60px_rgba(37,99,235,0.08),-20px_-20px_60px_rgba(255,255,255,0.9)]
+          border-[#2570C2]/10
+          shadow-2xl md:shadow-[20px_20px_60px_rgba(17,40,78,0.05),-20px_-20px_60px_rgba(255,255,255,0.9)]
           overflow-y-auto
           z-40 md:z-auto
           transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
         `}
       >
-        {/* Added padding at top on mobile view to avoid overlap with toggle button */}
         <div className="p-8 pt-20 md:pt-8 flex flex-col h-full min-h-[500px]">
           
-          {/* Logo Section */}
-          <div className="flex items-center gap-3">
-            <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black text-xl shadow-lg">
-              F
-            </div>
-            <div>
-              <h2 className="font-black text-xl text-slate-800">
-                Fincapify
-              </h2>
-            </div>
-          </div>
+          
+         {/* Logo Section */}
+<div 
+  onClick={() => {
+    navigate('/admin/dashboard');
+    setIsOpen(false);
+  }}
+  className="flex items-center gap-2.5 cursor-pointer select-none"
+>
+  <img 
+    src="/logo.svg" 
+    alt="Fincapify Logo" 
+    className="h-11 w-auto object-contain" 
+  />
+  <span className="font-black text-xl text-[#11284E] tracking-tight">
+    Fincapify
+  </span>
+</div>
 
-          {/* Navigation Menu (Updated with Blue Theme Hover and Active State) */}
+          {/* Navigation Menu */}
           <nav className="mt-10 space-y-3 flex-1">
             {menus.map((item) => {
               const active = isActive(item.path);
@@ -100,12 +106,12 @@ export default function Sidebar({ user }) {
                   key={item.name}
                   onClick={() => {
                     navigate(item.path);
-                    setIsOpen(false); // Auto-closes menu on mobile selection
+                    setIsOpen(false); // Auto-closes menu on mobile
                   }}
                   className={`w-full text-left px-5 py-4 rounded-2xl transition-all duration-300 font-semibold cursor-pointer ${
                     active
-                      ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-[0_15px_35px_rgba(37,99,235,0.25)]"
-                      : "text-slate-600 hover:bg-blue-50 hover:text-blue-600"
+                      ? "bg-gradient-to-r from-[#2570C2] to-[#11284E] text-white shadow-[0_12px_25px_rgba(17,40,78,0.18)]"
+                      : "text-slate-600 hover:bg-[#2570C2]/10 hover:text-[#2570C2]"
                   }`}
                 >
                   {item.name}
@@ -114,10 +120,10 @@ export default function Sidebar({ user }) {
             })}
           </nav>
 
-          {/* User Card (Updated with Blue Theme colors) */}
-          <div className="mt-6 p-4 rounded-2xl bg-blue-50/60 border border-blue-100">
+          {/* User Card (थीम आधारित सॉफ्ट बैकग्राउंड और प्रोफाइल ग्रेडीएंट) */}
+          <div className="mt-6 p-4 rounded-2xl bg-[#2570C2]/5 border border-[#2570C2]/10">
             <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold uppercase">
+              <div className="h-12 w-12 rounded-full bg-gradient-to-br from-[#2570C2] to-[#11284E] flex items-center justify-center text-white font-bold uppercase shadow-sm">
                 {user?.name ? user.name.charAt(0) : "A"}
               </div>
 

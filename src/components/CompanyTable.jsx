@@ -63,18 +63,20 @@ export default function CompanyTable() {
   };
 
   return (
-    <div className="rounded-[32px] bg-white/70 backdrop-blur-xl border border-pink-100 overflow-hidden shadow-[15px_15px_35px_rgba(236,72,153,0.08)]">
+    // कंटेनर बॉर्डर और शैडो को थीम के अनुसार सॉफ्ट ब्लू किया गया है
+    <div className="rounded-[32px] bg-white/70 backdrop-blur-xl border border-blue-100 overflow-hidden shadow-[15px_15px_35px_rgba(37,112,194,0.05)]">
       
       {/* Header section with Dynamic Add Button */}
-      <div className="p-6 border-b border-pink-100 flex justify-between items-center">
+      <div className="p-6 border-b border-blue-50 flex justify-between items-center">
         <div>
           <h3 className="text-xl font-black text-slate-800">Companies</h3>
           <p className="text-sm text-slate-500">Registered organizations</p>
         </div>
 
+        {/* बटन को Fincapify थीम में बदला गया है */}
         <button 
           onClick={() => navigate('/admin/companies/create')}
-          className="px-5 py-3 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold shadow-lg hover:scale-105 transition cursor-pointer"
+          className="px-5 py-3 rounded-2xl bg-gradient-to-r from-[#2570C2] to-[#11284E] text-white font-bold shadow-lg shadow-[#2570C2]/15 hover:scale-105 transition cursor-pointer"
         >
           + Add Company
         </button>
@@ -82,7 +84,8 @@ export default function CompanyTable() {
 
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-pink-50">
+          {/* हेडर का रंग सॉफ्ट ब्लू किया गया है */}
+          <thead className="bg-blue-50/40">
             <tr>
               <th className="text-left p-5 text-sm font-bold text-slate-600">Company</th>
               <th className="text-left p-5 text-sm font-bold text-slate-600">Email</th>
@@ -95,7 +98,7 @@ export default function CompanyTable() {
             {loading ? (
               // Glowing Skeleton Rows for Loading State
               [1, 2, 3].map((index) => (
-                <tr key={index} className="animate-pulse border-t border-pink-50">
+                <tr key={index} className="animate-pulse border-t border-slate-100">
                   <td className="p-5">
                     <div className="flex items-center gap-4">
                       <div className="h-12 w-12 rounded-2xl bg-slate-200"></div>
@@ -118,11 +121,12 @@ export default function CompanyTable() {
               companies.slice(0, 5).map((company) => ( // dashboard ke liye top 5 companies show karne ke liye slice kiya hai
                 <tr
                   key={company.id}
-                  className="border-t border-pink-50 hover:bg-pink-50/50 transition duration-200"
+                  className="border-t border-slate-100 hover:bg-blue-50/20 transition duration-200"
                 >
                   <td className="p-5">
                     <div className="flex items-center gap-4">
-                      <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-500 text-white flex items-center justify-center font-black">
+                      {/* कंपनी के पहले अक्षर का बॉक्स थीम में बदला गया */}
+                      <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-[#2570C2] to-[#11284E] text-white flex items-center justify-center font-black">
                         {company.name ? company.name[0].toUpperCase() : "C"}
                       </div>
                       <span className="font-semibold text-slate-800">
@@ -140,26 +144,34 @@ export default function CompanyTable() {
                       className={`px-4 py-2 rounded-full text-xs font-bold inline-block ${
                         Number(company.status) === 1
                           ? "bg-emerald-100 text-emerald-600"
-                          : "bg-rose-100 text-rose-500"
+                          : "bg-rose-100 text-rose-500" // इनएक्टिव को लाल ही रखा गया है ताकि कंट्रास्ट बना रहे
                       }`}
                     >
                       {Number(company.status) === 1 ? "Active" : "Inactive"}
                     </span>
                   </td>
 
-                  <td className="p-5 text-center space-x-3 whitespace-nowrap">
-                    <button 
-                      onClick={() => navigate(`/admin/companies/edit/${company.id}`)}
-                      className="text-pink-600 hover:text-pink-800 font-bold transition cursor-pointer"
-                    >
-                      Edit
-                    </button>
-                    <button 
-                      onClick={() => handleDelete(company.id)}
-                      className="text-red-500 hover:text-red-700 font-bold transition cursor-pointer"
-                    >
-                      Delete
-                    </button>
+                  {/* एक्शन सेल (टेक्स्ट से फॉन्टऑसम आइकॉन में बदला गया) */}
+                  <td className="p-5 text-center whitespace-nowrap">
+                    <div className="flex items-center justify-center gap-1.5">
+                      {/* एडिट आइकॉन बटन */}
+                      <button 
+                        onClick={() => navigate(`/admin/companies/edit/${company.id}`)}
+                        className="h-9 w-9 text-[#2570C2] hover:bg-blue-50/50 rounded-xl transition-all flex items-center justify-center border border-blue-100 cursor-pointer"
+                        title="Edit Company"
+                      >
+                        <i className="fa-solid fa-pen-to-square text-sm"></i>
+                      </button>
+
+                      {/* डिलीट आइकॉन बटन */}
+                      <button 
+                        onClick={() => handleDelete(company.id)}
+                        className="h-9 w-9 text-red-500 hover:bg-red-50/50 rounded-xl transition-all flex items-center justify-center border border-red-100 cursor-pointer"
+                        title="Delete Company"
+                      >
+                        <i className="fa-solid fa-trash-can text-sm"></i>
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))

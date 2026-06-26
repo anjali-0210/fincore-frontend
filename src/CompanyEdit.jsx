@@ -70,16 +70,16 @@ function CompanyEdit({ user, handleLogout }) {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col md:flex-row">
+        // बाहरी बैकग्राउंड को सॉफ्ट नीले ग्रेडीएंट में बदला गया है
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-100 flex flex-col md:flex-row">
             
-           
             <Sidebar user={user} handleLogout={handleLogout} />
 
             <div className="flex-1 flex flex-col min-w-0">
                 <Header user={user} handleLogout={handleLogout} />
                 <main className="p-4 sm:p-6 lg:p-8 space-y-6 overflow-y-auto">
                     
-                    {/* Top Action Header - Title Left, Button Right */}
+                    {/* Top Action Header */}
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 max-w-4xl w-full">
                         <div>
                             <h1 className="text-2xl font-black text-slate-800">Edit Company</h1>
@@ -110,7 +110,7 @@ function CompanyEdit({ user, handleLogout }) {
                                         onChange={(e) => setName(e.target.value)} 
                                         required 
                                         placeholder="e.g. Webplex Technologies"
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm" // फ़ोकस और बॉर्डर कलर्स को थीम ब्लू किया गया
                                     />
                                 </div>
 
@@ -124,7 +124,7 @@ function CompanyEdit({ user, handleLogout }) {
                                         value={email} 
                                         onChange={(e) => setEmail(e.target.value)} 
                                         placeholder="contact@webplex.com"
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -138,7 +138,7 @@ function CompanyEdit({ user, handleLogout }) {
                                         value={phone} 
                                         onChange={(e) => setPhone(e.target.value)} 
                                         placeholder="8875987756"
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -152,7 +152,7 @@ function CompanyEdit({ user, handleLogout }) {
                                         value={gstNumber} 
                                         onChange={(e) => setGstNumber(e.target.value)} 
                                         placeholder="e.g. 07AAAAA1111A1Z1"
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
                             </div>
@@ -167,7 +167,7 @@ function CompanyEdit({ user, handleLogout }) {
                                     onChange={(e) => setAddress(e.target.value)} 
                                     placeholder="Full office location coordinates..."
                                     rows="3"
-                                    className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                    className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                 />
                             </div>
 
@@ -179,14 +179,14 @@ function CompanyEdit({ user, handleLogout }) {
                                 <select 
                                     value={status} 
                                     onChange={(e) => setStatus(e.target.value)} 
-                                    className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm bg-white"
+                                    className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm bg-white"
                                 >
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
                                 </select>
                             </div>
 
-                            {/* Bottom Footer Action Buttons - Stacked on mobile, Row layout on small screens up */}
+                            {/* Bottom Footer Action Buttons */}
                             <div className="flex flex-col-reverse sm:flex-row sm:justify-between items-stretch sm:items-center pt-4 border-t border-slate-100 gap-3">
                                 <button 
                                     type="button" 
@@ -197,7 +197,7 @@ function CompanyEdit({ user, handleLogout }) {
                                 </button>
                                 <button 
                                     type="submit" 
-                                    className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-xl shadow-lg shadow-rose-500/20 hover:opacity-95 transition-all text-sm flex items-center justify-center gap-2"
+                                    className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-[#2570C2] to-[#11284E] text-white font-bold rounded-xl shadow-lg shadow-blue-500/10 hover:opacity-95 transition-all text-sm flex items-center justify-center gap-2" // Fincapify थीम में बदला गया है
                                 >
                                     <i className="fa-solid fa-floppy-disk"></i> Update Details
                                 </button>

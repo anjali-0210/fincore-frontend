@@ -4,7 +4,8 @@ import FrontendFooter from './FrontendFooter';
 
 export default function Home() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col justify-between items-center w-full m-0 p-0 box-border text-slate-800">
+        // बाहरी बैकग्राउंड को Fincapify थीम के अनुकूल सॉफ्ट ब्लू टोन में बदला गया है
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-100 flex flex-col justify-between items-center w-full m-0 p-0 box-border text-slate-800">
             
             {/* 1. Header (Pushes to the top edges perfectly) */}
             <FrontendHeader />
@@ -12,15 +13,15 @@ export default function Home() {
             {/* 2. Responsive Main Content Area */}
             <main className="flex-1 flex flex-col items-center justify-center text-center max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 gap-6 sm:gap-8 box-border">
                 
-                {/* Small Pill Tag */}
-                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-bold bg-pink-500/10 text-pink-600 border border-pink-500/15 tracking-wider uppercase">
+                {/* Small Pill Tag - थीम नीले रंग में परिवर्तित */}
+                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-bold bg-[#2570C2]/10 text-[#2570C2] border border-[#2570C2]/15 tracking-wider uppercase">
                     Enterprise ERP Solution
                 </span>
 
-                {/* Responsive Main Heading */}
+                {/* Responsive Main Heading - "Management System" का ग्रेडिएंट रंग बदला गया */}
                 <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-800 leading-[1.15] tracking-tight m-0">
                     Finance & Expense <br />
-                    <span className="bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-[#2570C2] to-[#11284E] bg-clip-text text-transparent">
                         Management System
                     </span>
                 </h1>
@@ -30,12 +31,12 @@ export default function Home() {
                     A secure and modern financial ERP platform. Seamlessly track, audit, and manage your business invoices, income records, payments, and pending dues in one centralized dashboard.
                 </p>
 
-                {/* Fully Responsive Static Feature Grid (1 col on mobile, 2 on tablet, 3 on desktop) */}
+                {/* Fully Responsive Static Feature Grid */}
                 <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl mt-12 sm:mt-16">
                     
-                    {/* Feature Card 1 */}
+                    {/* Feature Card 1 (Accent Blue Icon) */}
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_10px_25px_rgba(0,0,0,0.01)] text-left flex flex-col gap-3 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-pink-500/10 text-pink-500">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-[#2570C2]/10 text-[#2570C2]">
                             📊
                         </div>
                         <h3 className="text-base sm:text-lg font-bold text-slate-800 m-0">
@@ -46,9 +47,9 @@ export default function Home() {
                         </p>
                     </div>
 
-                    {/* Feature Card 2 */}
+                    {/* Feature Card 2 (Navy Blue Icon) */}
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_10px_25px_rgba(0,0,0,0.01)] text-left flex flex-col gap-3 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-rose-500/10 text-rose-500">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-[#11284E]/10 text-[#11284E]">
                             📁
                         </div>
                         <h3 className="text-base sm:text-lg font-bold text-slate-800 m-0">
@@ -59,9 +60,9 @@ export default function Home() {
                         </p>
                     </div>
 
-                    {/* Feature Card 3 (Takes full span on medium screen for balance if needed, or stays grid) */}
+                    {/* Feature Card 3 (Cyan Icon) */}
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_10px_25px_rgba(0,0,0,0.01)] text-left flex flex-col gap-3 hover:-translate-y-1 hover:shadow-md transition-all duration-300 sm:col-span-2 lg:col-span-1">
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-purple-500/10 text-purple-500">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-cyan-500/10 text-cyan-600">
                             💳
                         </div>
                         <h3 className="text-base sm:text-lg font-bold text-slate-800 m-0">

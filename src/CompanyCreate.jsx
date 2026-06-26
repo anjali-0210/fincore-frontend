@@ -45,16 +45,16 @@ function CompanyCreate({ user, handleLogout }) {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col md:flex-row">
+        // बाहरी बैकग्राउंड को सॉफ्ट नीले ग्रेडीएंट में बदला गया है
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-100 flex flex-col md:flex-row">
             
-            {/* ✅ बिना किसी wrapper div के सीधे Sidebar को रखें */}
             <Sidebar user={user} handleLogout={handleLogout} />
 
             <div className="flex-1 flex flex-col min-w-0">
                 <Header user={user} handleLogout={handleLogout} />
                 <main className="p-4 sm:p-6 lg:p-8 space-y-6">
                     
-                    {/* Top Action Header - Stacked on mobile, side-by-side on small screens up */}
+                    {/* Top Action Header */}
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 max-w-4xl w-full">
                         <h1 className="text-xl font-bold text-slate-800">Add New Company</h1>
                         <button 
@@ -77,7 +77,7 @@ function CompanyCreate({ user, handleLogout }) {
                                         onChange={(e) => setName(e.target.value)} 
                                         placeholder="e.g. Webplex Technologies" 
                                         required 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2] transition-all text-sm" // फ़ोकस रिंग का रंग बदला गया
                                     />
                                 </div>
                                 <div className="flex flex-col gap-1.5">
@@ -87,7 +87,7 @@ function CompanyCreate({ user, handleLogout }) {
                                         value={email} 
                                         onChange={(e) => setEmail(e.target.value)} 
                                         placeholder="e.g. contact@webplex.com" 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
                                 <div className="flex flex-col gap-1.5">
@@ -97,7 +97,7 @@ function CompanyCreate({ user, handleLogout }) {
                                         value={phone} 
                                         onChange={(e) => setPhone(e.target.value)} 
                                         placeholder="e.g. 8875987756" 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
                                 <div className="flex flex-col gap-1.5">
@@ -107,7 +107,7 @@ function CompanyCreate({ user, handleLogout }) {
                                         value={gstNumber} 
                                         onChange={(e) => setGstNumber(e.target.value)} 
                                         placeholder="e.g. GST12345" 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
                             </div>
@@ -119,7 +119,7 @@ function CompanyCreate({ user, handleLogout }) {
                                     onChange={(e) => setAddress(e.target.value)} 
                                     placeholder="Full office address..." 
                                     rows="3"
-                                    className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all text-sm"
+                                    className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2] transition-all text-sm"
                                 />
                             </div>
 
@@ -128,14 +128,14 @@ function CompanyCreate({ user, handleLogout }) {
                                 <select 
                                     value={status} 
                                     onChange={(e) => setStatus(e.target.value)} 
-                                    className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all text-sm bg-white"
+                                    className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2] transition-all text-sm bg-white"
                                 >
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
                                 </select>
                             </div>
 
-                            {/* Action Buttons - Stacked on mobile, Row layout on small screens up */}
+                            {/* Action Buttons */}
                             <div className="flex flex-col-reverse sm:flex-row sm:justify-between items-stretch sm:items-center gap-3 pt-4 border-t border-slate-100">
                                 <button 
                                     type="button" 
@@ -146,7 +146,7 @@ function CompanyCreate({ user, handleLogout }) {
                                 </button>
                                 <button 
                                     type="submit" 
-                                    className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-xl shadow-lg shadow-rose-500/20 hover:opacity-95 transition-all text-sm cursor-pointer text-center"
+                                    className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-[#2570C2] to-[#11284E] text-white font-bold rounded-xl shadow-lg shadow-blue-500/10 hover:opacity-95 transition-all text-sm cursor-pointer text-center" // Fincapify थीम में बदला गया है
                                 >
                                     Save Company
                                 </button>

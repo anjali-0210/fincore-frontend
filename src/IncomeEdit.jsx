@@ -107,9 +107,8 @@ function IncomeEdit({ user, handleLogout }) {
     };
 
     return (
-        /* Outer Layout - stacks vertically on mobile, horizontally on desktop */
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col md:flex-row">
-            
+        // बाहरी बैकग्राउंड को Fincapify थीम के अनुकूल सॉफ्ट ब्लू टोन में बदला गया है
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-100 flex flex-col md:flex-row">
             
             <Sidebar user={user} handleLogout={handleLogout} />
 
@@ -118,7 +117,7 @@ function IncomeEdit({ user, handleLogout }) {
                 <Header user={user} handleLogout={handleLogout} />
                 <main className="p-4 sm:p-6 lg:p-8 space-y-6">
                     
-                    {/* Header - Stacks on mobile, side-by-side on sm screens and up */}
+                    {/* Header */}
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 max-w-4xl w-full">
                         <div>
                             <h1 className="text-xl sm:text-2xl font-black text-slate-800">Edit Income Transaction</h1>
@@ -147,7 +146,7 @@ function IncomeEdit({ user, handleLogout }) {
                                         value={companyId} 
                                         onChange={(e) => setCompanyId(e.target.value)}
                                         required
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm bg-white"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm bg-white" // फ़ोकस और बॉर्डर कलर्स को थीम ब्लू किया गया
                                     >
                                         <option value="">-- Choose Company --</option>
                                         {companies.map(comp => (
@@ -167,7 +166,7 @@ function IncomeEdit({ user, handleLogout }) {
                                         onChange={(e) => setClientName(e.target.value)} 
                                         required 
                                         placeholder="e.g. John Doe" 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -181,7 +180,7 @@ function IncomeEdit({ user, handleLogout }) {
                                         value={invoiceNo} 
                                         onChange={(e) => setInvoiceNo(e.target.value)} 
                                         placeholder="e.g. INV-2026-001" 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -195,7 +194,7 @@ function IncomeEdit({ user, handleLogout }) {
                                         value={projectService} 
                                         onChange={(e) => setProjectService(e.target.value)} 
                                         required 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -209,7 +208,7 @@ function IncomeEdit({ user, handleLogout }) {
                                         value={totalAmount} 
                                         onChange={(e) => setTotalAmount(e.target.value)} 
                                         required 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -223,7 +222,7 @@ function IncomeEdit({ user, handleLogout }) {
                                         value={receivedAmount} 
                                         onChange={(e) => setReceivedAmount(e.target.value)} 
                                         required 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -236,7 +235,7 @@ function IncomeEdit({ user, handleLogout }) {
                                         type="date" 
                                         value={paymentDate} 
                                         onChange={(e) => setPaymentDate(e.target.value)} 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -249,7 +248,7 @@ function IncomeEdit({ user, handleLogout }) {
                                         type="date" 
                                         value={dueDate} 
                                         onChange={(e) => setDueDate(e.target.value)} 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -261,7 +260,7 @@ function IncomeEdit({ user, handleLogout }) {
                                     <select 
                                         value={paymentMode} 
                                         onChange={(e) => setPaymentMode(e.target.value)} 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm bg-white"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm bg-white"
                                     >
                                         <option value="UPI">UPI / Net Banking</option>
                                         <option value="Cash">Cash</option>
@@ -281,11 +280,11 @@ function IncomeEdit({ user, handleLogout }) {
                                     onChange={(e) => setNotes(e.target.value)} 
                                     placeholder="Add transaction specific annotations..." 
                                     rows="3"
-                                    className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                    className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                 />
                             </div>
 
-                            {/* Footer Buttons - Update Details Left, Cancel Right */}
+                            {/* Footer Buttons */}
                             <div className="flex flex-col-reverse sm:flex-row sm:justify-between items-stretch sm:items-center pt-4 border-t border-slate-100 gap-3">
                                 <button 
                                     type="button" 
@@ -296,7 +295,7 @@ function IncomeEdit({ user, handleLogout }) {
                                 </button>
                                 <button 
                                     type="submit" 
-                                    className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-xl shadow-lg shadow-rose-500/20 hover:opacity-95 transition-all text-sm flex items-center justify-center gap-2"
+                                    className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-[#2570C2] to-[#11284E] text-white font-bold rounded-xl shadow-lg shadow-blue-500/10 hover:opacity-95 transition-all text-sm flex items-center justify-center gap-2"
                                 >
                                     <i className="fa-solid fa-floppy-disk"></i> Update Transaction
                                 </button>

@@ -28,11 +28,12 @@ function ClientView({ user, handleLogout }) {
         fetchClient();
     }, [id]);
 
-    if (loading) return <p className="p-8 text-center text-sm">Loading details...</p>;
+    if (loading) return <p className="p-8 text-center text-sm text-slate-500">Loading details...</p>;
     if (error) return <p className="p-8 text-red-500 text-center">{error}</p>;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col md:flex-row">
+        /* BACKGROUND GRADIENT CHANGED TO SLATE/BLUE/INDIGO */
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-100/40 flex flex-col md:flex-row">
             <Sidebar user={user} handleLogout={handleLogout} />
 
             <div className="flex-1 flex flex-col min-w-0">
@@ -46,7 +47,7 @@ function ClientView({ user, handleLogout }) {
                             <h2 className="text-xl font-black text-slate-800">Client Profile View</h2>
                             <p className="text-xs text-slate-500 mt-1">Read-only profile info and banking list.</p>
                         </div>
-                        <button onClick={() => navigate('/admin/clients')} className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl border text-xs sm:text-sm">
+                        <button onClick={() => navigate('/admin/clients')} className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl border text-xs sm:text-sm transition-colors">
                             ← Back
                         </button>
                     </div>
@@ -80,7 +81,8 @@ function ClientView({ user, handleLogout }) {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {client.addresses?.map((addr, i) => (
                                 <div key={i} className="border border-slate-100 p-4 rounded-xl bg-slate-50/50">
-                                    <span className="text-xs font-bold text-pink-500">Address {i + 1}</span>
+                                    {/* LABEL TEXT COLOR CHANGED TO INDIGO */}
+                                    <span className="text-xs font-bold text-indigo-600">Address {i + 1}</span>
                                     <p className="text-sm font-semibold text-slate-700 mt-1">{addr.address_line}</p>
                                     <p className="text-xs text-slate-500 mt-0.5">{addr.city || 'N/A'}, {addr.state || 'N/A'} - {addr.zip || 'N/A'}</p>
                                 </div>
@@ -88,29 +90,43 @@ function ClientView({ user, handleLogout }) {
                         </div>
                     </div>
 
-                    {/* Bank Accounts Cards */}
+                    {/* Bank Accounts Cards (Optional Check Added) */}
                     <div className="bg-white p-6 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.01)] border border-slate-100 space-y-4">
-                        <h3 className="text-base font-bold text-slate-800 border-b pb-2">Linked Bank Accounts ({client.bank_details?.length || 0})</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {client.bank_details?.map((bank, i) => (
-                                <div key={i} className="border border-slate-100 p-4 rounded-xl bg-slate-50/50 space-y-2">
-                                    <div>
-                                        <span className="text-xs font-bold text-pink-500">Bank Details {i + 1}</span>
-                                        <h4 className="text-sm font-bold text-slate-800 mt-1">{bank.bank_name}</h4>
-                                    </div>
-                                    <div className="grid grid-cols-2 text-xs gap-2">
+                        <h3 className="text-base font-bold text-slate-800 border-b pb-2">
+                            Linked Bank Accounts ({client.bank_details?.length || 0})
+                        </h3>
+                        {client.bank_details && client.bank_details.length > 0 ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {client.bank_details.map((bank, i) => (
+                                    <div key={i} className="border border-slate-100 p-4 rounded-xl bg-slate-50/50 space-y-2">
                                         <div>
-                                            <span className="text-slate-400">Account No:</span>
-                                            <p className="font-semibold text-slate-800">{bank.account_no}</p>
+                                            {/* LABEL TEXT COLOR CHANGED TO INDIGO */}
+                                            <span className="text-xs font-bold text-indigo-600">Bank Details {i + 1}</span>
+                                            <h4 className="text-sm font-bold text-slate-800 mt-1">{bank.bank_name || 'N/A'}</h4>
                                         </div>
-                                        <div>
-                                            <span className="text-slate-400">IFSC Code:</span>
-                                            <p className="font-mono font-semibold text-slate-800">{bank.ifsc}</p>
+                                        <div className="grid grid-cols-2 text-xs gap-y-2 gap-x-1">
+                                            <div>
+                                                <span className="text-slate-400">Account No:</span>
+                                                <p className="font-semibold text-slate-800">{bank.account_no || 'N/A'}</p>
+                                            </div>
+                                            <div>
+                                                <span className="text-slate-400">IFSC Code:</span>
+                                                <p className="font-mono font-semibold text-slate-800">{bank.ifsc || 'N/A'}</p>
+                                            </div>
+                                            {/* ब्रांच की जानकारी */}
+                                            {bank.branch && (
+                                                <div className="col-span-2 mt-1">
+                                                    <span className="text-slate-400">Branch Name:</span>
+                                                    <p className="font-semibold text-slate-800">{bank.branch}</p>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="text-sm text-slate-400 italic py-2">No bank accounts linked to this client.</p>
+                        )}
                     </div>
 
                 </main>

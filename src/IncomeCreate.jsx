@@ -71,10 +71,9 @@ function IncomeCreate({ user, handleLogout }) {
     };
 
     return (
-        /* Outer flex container - handles responsive row/column stack */
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col md:flex-row">
+        // बाहरी बैकग्राउंड को Fincapify थीम के अनुकूल सॉफ्ट ब्लू टोन में बदला गया है
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-100 flex flex-col md:flex-row">
             
-            {/* ✅ बिना किसी wrapper div के सीधे Sidebar को रखें */}
             <Sidebar user={user} handleLogout={handleLogout} />
 
             {/* Main Area */}
@@ -82,7 +81,7 @@ function IncomeCreate({ user, handleLogout }) {
                 <Header user={user} handleLogout={handleLogout} />
                 <main className="p-4 sm:p-6 lg:p-8 space-y-6">
                     
-                    {/* Header - Stacks on mobile, side-by-side on sm screens and up */}
+                    {/* Header */}
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 max-w-4xl w-full">
                         <h1 className="text-xl font-bold text-slate-800">Log New Revenue / Income</h1>
                         <button 
@@ -108,7 +107,7 @@ function IncomeCreate({ user, handleLogout }) {
                                         value={companyId} 
                                         onChange={(e) => setCompanyId(e.target.value)}
                                         required
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm bg-white"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm bg-white" // फ़ोकस और बॉर्डर कलर्स को थीम ब्लू किया गया
                                     >
                                         <option value="">-- Choose Company --</option>
                                         {companies.map(comp => (
@@ -128,7 +127,7 @@ function IncomeCreate({ user, handleLogout }) {
                                         onChange={(e) => setClientName(e.target.value)} 
                                         required 
                                         placeholder="e.g. John Doe, USA" 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -142,7 +141,7 @@ function IncomeCreate({ user, handleLogout }) {
                                         value={invoiceNo} 
                                         onChange={(e) => setInvoiceNo(e.target.value)} 
                                         placeholder="e.g. INV-2026-001" 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -157,7 +156,7 @@ function IncomeCreate({ user, handleLogout }) {
                                         onChange={(e) => setProjectService(e.target.value)} 
                                         required 
                                         placeholder="e.g. UI/UX Design Contract" 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -172,7 +171,7 @@ function IncomeCreate({ user, handleLogout }) {
                                         onChange={(e) => setTotalAmount(e.target.value)} 
                                         required 
                                         placeholder="0.00" 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -187,7 +186,7 @@ function IncomeCreate({ user, handleLogout }) {
                                         onChange={(e) => setReceivedAmount(e.target.value)} 
                                         required 
                                         placeholder="0.00" 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -200,7 +199,7 @@ function IncomeCreate({ user, handleLogout }) {
                                         type="date" 
                                         value={paymentDate} 
                                         onChange={(e) => setPaymentDate(e.target.value)} 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -213,7 +212,7 @@ function IncomeCreate({ user, handleLogout }) {
                                         type="date" 
                                         value={dueDate} 
                                         onChange={(e) => setDueDate(e.target.value)} 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                     />
                                 </div>
 
@@ -225,7 +224,7 @@ function IncomeCreate({ user, handleLogout }) {
                                     <select 
                                         value={paymentMode} 
                                         onChange={(e) => setPaymentMode(e.target.value)} 
-                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm bg-white"
+                                        className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm bg-white"
                                     >
                                         <option value="UPI">UPI / Net Banking</option>
                                         <option value="Cash">Cash</option>
@@ -245,11 +244,11 @@ function IncomeCreate({ user, handleLogout }) {
                                     onChange={(e) => setNotes(e.target.value)} 
                                     placeholder="Add any specific details regarding this invoice payment transaction..." 
                                     rows="3"
-                                    className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all text-sm"
+                                    className="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#2570C2]/20 focus:border-[#2570C2] transition-all text-sm"
                                 />
                             </div>
 
-                            {/* Footer Buttons - Stacked on mobile, Row layout on sm screens up */}
+                            {/* Footer Buttons */}
                             <div className="flex flex-col-reverse sm:flex-row sm:justify-between items-stretch sm:items-center pt-4 border-t border-slate-100 gap-3">
                                 <button 
                                     type="button" 
@@ -260,7 +259,7 @@ function IncomeCreate({ user, handleLogout }) {
                                 </button>
                                 <button 
                                     type="submit" 
-                                    className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-xl shadow-lg shadow-rose-500/20 hover:opacity-95 transition-all text-sm flex items-center justify-center gap-2"
+                                    className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-[#2570C2] to-[#11284E] text-white font-bold rounded-xl shadow-lg shadow-blue-500/10 hover:opacity-95 transition-all text-sm flex items-center justify-center gap-2"
                                 >
                                     <i className="fa-solid fa-floppy-disk"></i> Log Transaction
                                 </button>

@@ -77,10 +77,9 @@ function CompaniesList({ user, handleLogout }) {
     }, [companies.length, totalPages, currentPage]);
 
     return (
-        /* Outer flex container - handles responsive row/column stack */
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 flex flex-col md:flex-row">
+        /* Outer flex container - बैकग्राउंड को थीम ब्लू किया गया है */
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-100 flex flex-col md:flex-row">
             
-         
             <Sidebar user={user} handleLogout={handleLogout} />
 
             {/* Main Area */}
@@ -90,7 +89,7 @@ function CompaniesList({ user, handleLogout }) {
                 {/* Responsive margin/padding */}
                 <main className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                     
-                    {/* Page Header - Responsive stacking (flex-col sm:flex-row) */}
+                    {/* Page Header (Add New Button को Fincapify थीम में बदला गया है) */}
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 sm:p-6 rounded-2xl sm:rounded-[24px] shadow-[0_10px_30px_rgba(0,0,0,0.02)] border border-slate-100">
                         <div>
                             <h1 className="text-xl sm:text-2xl font-black text-slate-800">
@@ -103,7 +102,7 @@ function CompaniesList({ user, handleLogout }) {
 
                         <button
                             onClick={() => navigate('/admin/companies/create')}
-                            className="w-full sm:w-auto px-5 py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold rounded-xl shadow-lg shadow-rose-500/20 hover:opacity-95 transition-all text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer"
+                            className="w-full sm:w-auto px-5 py-3 bg-gradient-to-r from-[#2570C2] to-[#11284E] text-white font-bold rounded-xl shadow-lg shadow-blue-500/10 hover:opacity-95 transition-all text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer"
                         >
                             <i className="fa-solid fa-plus"></i> Add New Company
                         </button>
@@ -143,7 +142,8 @@ function CompaniesList({ user, handleLogout }) {
                                             <tr key={company.id} className="hover:bg-slate-50/55 transition-colors duration-200">
                                                 <td className="px-6 py-4 text-sm font-semibold text-slate-800 whitespace-nowrap">
                                                     <div className="flex items-center gap-3">
-                                                        <div className="h-9 w-9 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center font-bold text-sm border border-pink-100">
+                                                        {/* कंपनी लोगो अवतार को सॉफ्ट थीम ब्लू किया गया है */}
+                                                        <div className="h-9 w-9 rounded-xl bg-blue-50 text-[#2570C2] flex items-center justify-center font-bold text-sm border border-blue-100">
                                                             {company.name ? company.name.charAt(0).toUpperCase() : 'C'}
                                                         </div>
                                                         {company.name}
@@ -173,10 +173,10 @@ function CompaniesList({ user, handleLogout }) {
                                                             <i className="fa-solid fa-eye text-sm"></i>
                                                         </button>
 
-                                                        {/* Edit Button */}
+                                                        {/* Edit Button (एडिट बटन को थीम ब्लू किया गया है) */}
                                                         <button 
                                                             onClick={() => navigate(`/admin/companies/edit/${company.id}`)}
-                                                            className="h-9 w-9 text-pink-600 hover:bg-pink-50 hover:text-pink-700 rounded-xl transition-all duration-200 flex items-center justify-center border border-pink-100 hover:border-pink-200 shadow-sm cursor-pointer"
+                                                            className="h-9 w-9 text-[#2570C2] hover:bg-blue-50/50 hover:text-[#11284E] rounded-xl transition-all duration-200 flex items-center justify-center border border-blue-100 hover:border-blue-200 shadow-sm cursor-pointer"
                                                             title="Edit Details"
                                                         >
                                                             <i className="fa-solid fa-pen-to-square text-sm"></i>
@@ -206,7 +206,7 @@ function CompaniesList({ user, handleLogout }) {
                             </table>
                         </div>
 
-                        {/* --- PAGINATION CONTROLS UI - Responsive flex-col to sm:flex-row --- */}
+                        {/* --- PAGINATION CONTROLS UI --- */}
                         {!loading && companies.length > itemsPerPage && (
                             <div className="bg-slate-50 px-4 sm:px-6 py-4 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
                                 <div className="text-xs sm:text-sm text-slate-500 text-center sm:text-left">
@@ -223,14 +223,14 @@ function CompaniesList({ user, handleLogout }) {
                                         <i className="fa-solid fa-chevron-left text-[10px]"></i> Prev
                                     </button>
 
-                                    {/* Page Numbers */}
+                                    {/* Page Numbers (एक्टिव पेज को Fincapify थीम ग्रेडीएंट दिया गया है) */}
                                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                                         <button
                                             key={page}
                                             onClick={() => setCurrentPage(page)}
                                             className={`h-9 w-9 text-xs sm:text-sm font-semibold rounded-xl border transition-all flex items-center justify-center cursor-pointer ${
                                                 currentPage === page
-                                                    ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white border-transparent'
+                                                    ? 'bg-gradient-to-r from-[#2570C2] to-[#11284E] text-white border-transparent'
                                                     : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
                                             }`}
                                         >
