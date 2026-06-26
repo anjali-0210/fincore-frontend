@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FINCAP Admin</title>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=1" />
+    <!-- Tailwind via CDN: no build step needed for styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: { DEFAULT: '#4f46e5', dark: '#4338ca' },
+            },
+          },
+        },
+      }
+    </script>
+  </head>
+  <body class="bg-slate-100 text-slate-800">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
