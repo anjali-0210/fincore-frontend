@@ -27,10 +27,17 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-900">
       <form onSubmit={submit} className="bg-white rounded-xl shadow-xl p-8 w-full max-w-sm">
-        <div className="text-2xl font-bold text-center mb-1">
-          FIN<span className="text-indigo-600">CAP</span>
-        </div>
-        <p className="text-center text-slate-500 text-sm mb-6">Business Finance Admin</p>
+       <div className="flex justify-center items-center gap-3 mb-1">
+  <img 
+    src="/logo.svg" 
+    alt="Fincapify Logo" 
+    className="h-10 w-auto object-contain" 
+  />
+  <span className="text-xl font-bold text-[#0c2340] tracking-tight">
+    Fincapify
+  </span>
+</div>
+      
 
         {error && <div className="mb-4 text-sm text-red-600 bg-red-50 rounded p-2">{error}</div>}
 
@@ -50,9 +57,7 @@ export default function Login() {
         >
           {loading ? 'Signing in…' : 'Sign in'}
         </button>
-        <p className="text-xs text-slate-400 text-center mt-4">
-          Seeded: admin@fincap.test / password
-        </p>
+       
       </form>
     </div>
   )
