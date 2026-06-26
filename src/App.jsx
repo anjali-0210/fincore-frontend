@@ -18,7 +18,7 @@ function Shell({ children }) {
 export default function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+  <Route path="/admin/login" element={<Login />} />
       <Route path="/" element={<Shell><Dashboard /></Shell>} />
       <Route path="/reports" element={<Shell><Reports /></Shell>} />
       {Object.entries(resources).map(([key, cfg]) => (
