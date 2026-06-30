@@ -6,7 +6,7 @@ export default function ProtectedRoute({ children }) {
   const token = localStorage.getItem('fincap_token')
 
   if (!user && !token) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/admin/login" replace />
   }
   return children
 }
