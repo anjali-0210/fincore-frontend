@@ -6,15 +6,20 @@ import Field from './Field'
 const inr = (n) => '₹' + Number(n || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 })
 
 // Date ko Asia/Kolkata timezone me convert karne ka function
+// Date aur Time (AM/PM) dono Asia/Kolkata timezone me dikhane ke liye
 const formatDate = (val) => {
   if (!val) return '—'
   const d = new Date(val)
   if (isNaN(d.getTime())) return val
-  return d.toLocaleDateString('en-IN', {
+  
+  return d.toLocaleString('en-IN', {
     timeZone: 'Asia/Kolkata',
     day: '2-digit',
     month: 'short',
     year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true, // AM/PM format ke liye
   })
 }
 
