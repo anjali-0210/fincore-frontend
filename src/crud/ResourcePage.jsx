@@ -5,6 +5,19 @@ import Field from './Field'
 
 const inr = (n) => '₹' + Number(n || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 })
 
+// Date ko Asia/Kolkata timezone me convert karne ka function
+const formatDate = (val) => {
+  if (!val) return '—'
+  const d = new Date(val)
+  if (isNaN(d.getTime())) return val
+  return d.toLocaleDateString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  })
+}
+
 const badgeColor = (s) => ({
   paid: 'bg-emerald-100 text-emerald-700',
   partial: 'bg-amber-100 text-amber-700',
@@ -21,6 +34,10 @@ function renderCell(col, row) {
   if (kind === 'money') return inr(row[key])
   if (kind === 'badge') {
     return <span className={`px-2 py-0.5 rounded text-xs font-medium ${badgeColor(row[key])}`}>{row[key]}</span>
+  }
+  // Agar column type 'date' ho YA value ISO date format (2026-08-13T...) me ho:
+  if (kind === 'date' || (typeof val === 'string' && /^\d{4}-\d{2}-\d{2}/.test(val))) {
+    return formatDate(val)
   }
   return val ?? '—'
 }
