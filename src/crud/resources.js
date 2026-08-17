@@ -87,6 +87,7 @@ export const resources = {
     columns: [
       ['invoice_no','Invoice'],
       ['client', 'Client', (r) => r.client?.name],
+      ['company_id', 'Company', (r) => r.company?.name || r.company_name || '—'],
       ['total_amount','Total','money'],
       ['received_amount','Received','money'],
       ['pending_amount','Pending','money'],

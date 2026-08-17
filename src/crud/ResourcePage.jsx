@@ -32,7 +32,7 @@ const badgeColor = (s) => ({
   dismissed: 'bg-slate-100 text-slate-500',
 }[s] || 'bg-slate-100 text-slate-600')
 
-function renderCell(col, row) {
+function renderCell(col, row, companies = []) {
   const [key, , kind] = col
   let val = typeof kind === 'function' ? kind(row) : row[key]
   if (typeof col[2] === 'function') val = col[2](row)
@@ -43,6 +43,12 @@ function renderCell(col, row) {
   // Agar column type 'date' ho YA value ISO date format (2026-08-13T...) me ho:
   if (kind === 'date' || (typeof val === 'string' && /^\d{4}-\d{2}-\d{2}/.test(val))) {
     return formatDate(val)
+  }
+  // Agar company ka naam relation me na mile toh company_id se match karein
+  if (key === 'company' || key === 'company_id' || col[1] === 'Company') {
+    if (val && val !== '—') return val
+    const found = companies.find((c) => String(c.id) === String(row.company_id || row.company))
+    if (found) return found.name
   }
   return val ?? '—'
 }
@@ -68,10 +74,19 @@ export default function ResourcePage({ config }) {
     const params = { page, per_page: 15 }
     if (companyFilter) params.company_id = companyFilter
     if (statusFilter) params.status = statusFilter
-    api.get(config.endpoint, { params })
-      .then(({ data }) => { setRows(data.data || []); setMeta(data.meta || null) })
-      .catch(() => setRows([]))
-      .finally(() => setLoading(false))
+   api.get(config.endpoint, { params })
+  .then(({ data }) => { 
+    setRows(data.data || (Array.isArray(data) ? data : [])); 
+    // Laravel ke standard aur resource pagination dono ko support karega
+    const paginationMeta = data.meta || {
+      current_page: data.current_page || 1,
+      last_page: data.last_page || 1,
+      total: data.total || (data.data ? data.data.length : 0),
+    };
+    setMeta(paginationMeta);
+  })
+  .catch(() => setRows([]))
+  .finally(() => setLoading(false))
   }, [config.endpoint, page, companyFilter, statusFilter])
 
   useEffect(() => { load() }, [load])
@@ -170,9 +185,11 @@ export default function ResourcePage({ config }) {
               <tr><td colSpan={config.columns.length + 1} className="py-8 text-center text-slate-400">No records.</td></tr>
             ) : rows.map((row) => (
               <tr key={row.id} className="border-b last:border-0 hover:bg-slate-50">
-                {config.columns.map((c) => (
-                  <td key={c[0]} className={`py-2.5 px-4 ${c[2] === 'money' ? 'text-right' : ''}`}>{renderCell(c, row)}</td>
-                ))}
+               {config.columns.map((c) => (
+  <td key={c[0]} className={`py-2.5 px-4 ${c[2] === 'money' ? 'text-right' : ''}`}>
+    {renderCell(c, row, companies)}
+  </td>
+))}
                 <td className="py-2.5 px-4 text-right whitespace-nowrap">
                   {config.addPayment && (
                     <button onClick={() => setPayFor(row)} className="text-emerald-600 hover:underline mr-3">Pay</button>
