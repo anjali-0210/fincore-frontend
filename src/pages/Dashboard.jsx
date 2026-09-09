@@ -4,7 +4,6 @@ import api from '../api/client'
 const inr = (n) => '₹' + Number(n || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 })
 
 function Stat({ label, value, accent }) {
-  // Color code dynamically maps based on the accent prop
   let iconBg = "bg-slate-50"
   let iconColor = "text-slate-500"
   
@@ -22,7 +21,6 @@ function Stat({ label, value, accent }) {
     iconColor = "text-[#1a5fb4]"
   }
 
-  // Icons derived from labels
   const getIcon = () => {
     if (label.includes("Income")) return "📥"
     if (label.includes("Expenses")) return "📤"
@@ -48,7 +46,12 @@ function Stat({ label, value, accent }) {
 export default function Dashboard() {
   const [companies, setCompanies] = useState([])
   const [companyId, setCompanyId] = useState('')
-  const [data, setData] = useState(null)
+  // By default Current Month (YYYY-MM format)
+  const [selectedMonth, setSelectedMonth] = useState(() => new Date().toISOString().slice(0, 7))
+  
+  const [dashboardRaw, setDashboardRaw] = useState(null)
+  const [incomes, setIncomes] = useState([])
+  const [expenses, setExpenses] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -57,15 +60,59 @@ export default function Dashboard() {
       .catch(() => {})
   }, [])
 
+  // Incomes aur Expenses fetch karenge month filtering ke liye
   useEffect(() => {
     setLoading(true)
-    api.get('/dashboard', { params: companyId ? { company_id: companyId } : {} })
-      .then(({ data }) => setData(data.data || data))
+
+    const p1 = api.get('/dashboard', { params: companyId ? { company_id: companyId } : {} })
+    const p2 = api.get('/incomes', { params: { per_page: 5000, ...(companyId ? { company_id: companyId } : {}) } }).catch(() => ({ data: [] }))
+    const p3 = api.get('/expenses', { params: { per_page: 5000, ...(companyId ? { company_id: companyId } : {}) } }).catch(() => ({ data: [] }))
+
+    Promise.all([p1, p2, p3])
+      .then(([dashRes, incRes, expRes]) => {
+        setDashboardRaw(dashRes.data?.data || dashRes.data)
+        setIncomes(incRes.data?.data || incRes.data || [])
+        setExpenses(expRes.data?.data || expRes.data || [])
+      })
       .catch(() => {})
       .finally(() => setLoading(false))
   }, [companyId])
 
-  if (loading && !data) {
+  // Helper date extractor (kisi bhi column me date ho usko YYYY-MM match karega)
+  const isRowInMonth = (row, monthStr) => {
+    const d = row.date || row.received_date || row.expense_date || row.created_at
+    if (!d) return false
+    return String(d).startsWith(monthStr)
+  }
+
+  // Current selected month ke basis pe calculate karna
+  const filteredIncomes = incomes.filter(item => isRowInMonth(item, selectedMonth))
+  const filteredExpenses = expenses.filter(item => isRowInMonth(item, selectedMonth))
+
+  const totalIncome = filteredIncomes.reduce((sum, item) => sum + Number(item.received_amount || item.amount || 0), 0)
+  const totalExpenses = filteredExpenses.reduce((sum, item) => sum + Number(item.amount || 0), 0)
+  const profitLoss = totalIncome - totalExpenses
+
+  // Selected month ke hisab se company wise calculation
+  const companySummary = (companies || [])
+    .filter(c => !companyId || String(c.id) === String(companyId))
+    .map(c => {
+      const cIncomes = filteredIncomes.filter(i => String(i.company_id) === String(c.id))
+      const cExpenses = filteredExpenses.filter(e => String(e.company_id) === String(c.id))
+
+      const cInc = cIncomes.reduce((sum, i) => sum + Number(i.received_amount || i.amount || 0), 0)
+      const cExp = cExpenses.reduce((sum, e) => sum + Number(e.amount || 0), 0)
+
+      return {
+        company_id: c.id,
+        company: c.name,
+        income: cInc,
+        expense: cExp,
+        profit: cInc - cExp
+      }
+    })
+
+  if (loading && !dashboardRaw) {
     return (
       <div className="flex flex-col items-center justify-center py-20 space-y-3">
         <div className="animate-spin rounded-full h-9 w-9 border-4 border-[#1a5fb4] border-t-transparent"></div>
@@ -74,7 +121,7 @@ export default function Dashboard() {
     )
   }
   
-  if (!data) {
+  if (!dashboardRaw) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
         <span className="text-4xl mb-2">📂</span>
@@ -91,27 +138,39 @@ export default function Dashboard() {
           <h1 className="text-2xl font-bold text-[#0c2340]">Overview</h1>
           <p className="text-xs text-slate-500 mt-0.5">Real-time business financial metrics</p>
         </div>
-        <select
-          value={companyId}
-          onChange={(e) => setCompanyId(e.target.value)}
-          className="border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#1a5fb4]/20 focus:border-[#1a5fb4] transition-all duration-200 shadow-sm sm:w-60"
-        >
-          <option value="">All companies</option>
-          {companies.map((c) => (
-            <option key={c.id} value={c.id}>{c.name}</option>
-          ))}
-        </select>
+        
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Month Filter */}
+          <input
+            type="month"
+            value={selectedMonth}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+            className="border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#1a5fb4]/20 focus:border-[#1a5fb4] transition-all duration-200 shadow-sm cursor-pointer"
+          />
+
+          {/* Company Filter */}
+          <select
+            value={companyId}
+            onChange={(e) => setCompanyId(e.target.value)}
+            className="border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-white font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#1a5fb4]/20 focus:border-[#1a5fb4] transition-all duration-200 shadow-sm sm:w-56"
+          >
+            <option value="">All companies</option>
+            {companies.map((c) => (
+              <option key={c.id} value={c.id}>{c.name}</option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Grid for stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Stat label="Total Income" value={inr(data.total_income)} accent="text-emerald-600" />
-        <Stat label="Total Expenses" value={inr(data.total_expenses)} accent="text-rose-600" />
-        <Stat label="Profit / Loss" value={inr(data.profit_loss)}
-          accent={data.profit_loss >= 0 ? 'text-emerald-600' : 'text-rose-600'} />
-        <Stat label="Pending Receivables" value={inr(data.pending_receivables)} accent="text-amber-600" />
-        <Stat label="Pending Payables" value={inr(data.pending_payables)} accent="text-amber-600" />
-        <Stat label="Companies" value={(data.company_wise_summary || []).length} />
+        <Stat label="Total Income" value={inr(totalIncome)} accent="text-emerald-600" />
+        <Stat label="Total Expenses" value={inr(totalExpenses)} accent="text-rose-600" />
+        <Stat label="Profit / Loss" value={inr(profitLoss)}
+          accent={profitLoss >= 0 ? 'text-emerald-600' : 'text-rose-600'} />
+        <Stat label="Pending Receivables" value={inr(dashboardRaw.pending_receivables)} accent="text-amber-600" />
+        <Stat label="Pending Payables" value={inr(dashboardRaw.pending_payables)} accent="text-amber-600" />
+        <Stat label="Companies" value={companySummary.length} />
       </div>
 
       {/* Lists Section Grid */}
@@ -121,7 +180,7 @@ export default function Dashboard() {
             <h2 className="font-bold text-base text-[#0c2340]">Today's Due Payments</h2>
             <span className="px-2 py-0.5 text-[10px] font-bold uppercase bg-rose-50 text-rose-600 rounded">Today</span>
           </div>
-          <DueList rows={data.today_due_payments} />
+          <DueList rows={dashboardRaw.today_due_payments} />
         </div>
         
         <div className="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6">
@@ -129,7 +188,7 @@ export default function Dashboard() {
             <h2 className="font-bold text-base text-[#0c2340]">Upcoming Due Payments (7 days)</h2>
             <span className="px-2 py-0.5 text-[10px] font-bold uppercase bg-[#1a5fb4]/5 text-[#1a5fb4] rounded">7 Days</span>
           </div>
-          <DueList rows={data.upcoming_due_payments} />
+          <DueList rows={dashboardRaw.upcoming_due_payments} />
         </div>
       </div>
 
@@ -137,7 +196,7 @@ export default function Dashboard() {
       <div className="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-bold text-base text-[#0c2340]">Company-wise Summary</h2>
-          <span className="text-[11px] font-semibold text-slate-400">Total: {(data.company_wise_summary || []).length} items</span>
+          <span className="text-[11px] font-semibold text-slate-400">Total: {companySummary.length} items</span>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm border-collapse min-w-[500px]">
@@ -150,7 +209,7 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100/60">
-              {(data.company_wise_summary || []).map((c) => (
+              {companySummary.map((c) => (
                 <tr key={c.company_id} className="hover:bg-slate-50/50 transition-colors group">
                   <td className="py-3 px-2 font-semibold text-slate-700 group-hover:text-[#1a5fb4] transition-colors">{c.company}</td>
                   <td className="py-3 px-2 text-right text-emerald-600 font-medium">{inr(c.income)}</td>
